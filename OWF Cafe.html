@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OWF Cafe — Slow mornings, done right</title>
+<meta name="description" content="OWF Cafe is a neighborhood coffee bar and bakery serving small-batch roasts and fresh pastries every morning. Come sit a while.">
+<meta property="og:title" content="OWF Cafe">
+<meta property="og:description" content="A neighborhood coffee bar and bakery. Slow mornings, done right.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&family=Work+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --espresso:#2B1B14;
+    --cream:#F5EBD8;
+    --almond:#E8DCC8;
+    --sage:#7C8B6F;
+    --sienna:#B5573B;
+    --ink:#3A322C;
+    --max:1120px;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0;}
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Work Sans', sans-serif;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  h1,h2,h3{
+    font-family:'Fraunces', serif;
+    color:var(--espresso);
+    font-weight:600;
+    line-height:1.1;
+  }
+
+  a{color:inherit;}
+
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 28px;}
+
+  a:focus-visible, button:focus-visible, input:focus-visible{
+    outline:2px solid var(--sienna);
+    outline-offset:3px;
+  }
+
+  /* ---------- header ---------- */
+  header{
+    padding:22px 0;
+    border-bottom:1px solid rgba(43,27,20,0.12);
+  }
+  header .wrap{display:flex;align-items:center;justify-content:space-between;gap:24px;}
+  .logo{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:1.4rem;
+    letter-spacing:0.02em;
+    color:var(--espresso);
+    text-decoration:none;
+  }
+  .logo span{color:var(--sienna);}
+  nav{display:flex;gap:28px;align-items:center;}
+  nav a{
+    text-decoration:none;
+    font-size:0.95rem;
+    font-weight:500;
+    color:var(--ink);
+    position:relative;
+  }
+  nav a::after{
+    content:"";
+    position:absolute;left:0;bottom:-4px;
+    width:0;height:1px;background:var(--sienna);
+    transition:width 0.2s ease;
+  }
+  nav a:hover::after{width:100%;}
+  .btn-cta{
+    background:var(--sienna);
+    color:var(--cream);
+    padding:10px 20px;
+    border-radius:2px;
+    font-weight:500;
+    font-size:0.9rem;
+    text-decoration:none;
+    border:1px solid var(--sienna);
+    transition:background 0.2s ease, color 0.2s ease;
+  }
+  .btn-cta:hover{background:transparent;color:var(--sienna);}
+  .nav-toggle{display:none;}
+
+  /* ---------- hero ---------- */
+  .hero{
+    padding:88px 0 96px;
+  }
+  .hero .wrap{
+    display:grid;
+    grid-template-columns:1.1fr 0.9fr;
+    gap:56px;
+    align-items:center;
+  }
+  .eyebrow{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.78rem;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--sage);
+    margin-bottom:18px;
+    display:inline-block;
+  }
+  .hero h1{
+    font-size:clamp(2.6rem, 5vw, 4rem);
+    max-width:11ch;
+    margin-bottom:22px;
+  }
+  .hero h1 em{
+    font-style:italic;
+    color:var(--sienna);
+  }
+  .hero p{
+    max-width:46ch;
+    font-size:1.08rem;
+    color:var(--ink);
+    opacity:0.85;
+    margin-bottom:32px;
+  }
+  .hero-actions{display:flex;gap:16px;flex-wrap:wrap;}
+  .btn-outline{
+    padding:12px 24px;
+    border:1px solid var(--espresso);
+    border-radius:2px;
+    text-decoration:none;
+    font-weight:500;
+    color:var(--espresso);
+    font-size:0.95rem;
+    transition:background 0.2s ease, color 0.2s ease;
+  }
+  .btn-outline:hover{background:var(--espresso);color:var(--cream);}
+  .btn-solid{
+    padding:12px 24px;
+    border-radius:2px;
+    text-decoration:none;
+    font-weight:500;
+    font-size:0.95rem;
+    background:var(--sienna);
+    color:var(--cream);
+    border:1px solid var(--sienna);
+    transition:opacity 0.2s ease;
+  }
+  .btn-solid:hover{opacity:0.85;}
+
+  /* hero illustration */
+  .cup-wrap{display:flex;justify-content:center;}
+  .steam path{
+    transform-origin:bottom center;
+    animation:rise 3.2s ease-in-out infinite;
+    opacity:0;
+  }
+  .steam path:nth-child(2){animation-delay:0.5s;}
+  .steam path:nth-child(3){animation-delay:1s;}
+  @keyframes rise{
+    0%{opacity:0; transform:translateY(0) scaleY(1);}
+    20%{opacity:0.5;}
+    80%{opacity:0.15;}
+    100%{opacity:0; transform:translateY(-26px) scaleY(1.15);}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .steam path{animation:none; opacity:0.35;}
+  }
+
+  /* ---------- about / receipt strip ---------- */
+  .about{
+    padding:80px 0;
+    background:var(--almond);
+    border-top:1px solid rgba(43,27,20,0.12);
+    border-bottom:1px solid rgba(43,27,20,0.12);
+  }
+  .about .wrap{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:64px;
+    align-items:center;
+  }
+  .about h2{font-size:2rem;margin-bottom:18px;max-width:14ch;}
+  .about p{max-width:48ch;opacity:0.85;}
+  .receipt{
+    font-family:'JetBrains Mono', monospace;
+    background:var(--cream);
+    padding:28px 26px;
+    border:1px solid rgba(43,27,20,0.18);
+    font-size:0.88rem;
+  }
+  .receipt .r-title{
+    text-align:center;
+    font-weight:500;
+    letter-spacing:0.08em;
+    margin-bottom:16px;
+    text-transform:uppercase;
+    color:var(--espresso);
+  }
+  .receipt .r-row{
+    display:flex;
+    justify-content:space-between;
+    padding:9px 0;
+    border-bottom:1px dashed rgba(43,27,20,0.22);
+  }
+  .receipt .r-row:last-child{border-bottom:none;}
+
+  /* ---------- menu ---------- */
+  .menu{padding:96px 0;}
+  .menu-head{max-width:56ch;margin-bottom:52px;}
+  .menu-head h2{font-size:2.1rem;margin-bottom:14px;}
+  .menu-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:48px;
+  }
+  .menu-cat h3{
+    font-size:1.15rem;
+    margin-bottom:20px;
+    padding-bottom:10px;
+    border-bottom:1px solid var(--espresso);
+  }
+  .menu-item{
+    display:flex;
+    align-items:baseline;
+    gap:8px;
+    margin-bottom:16px;
+  }
+  .menu-item .name{font-weight:500;white-space:nowrap;}
+  .menu-item .desc{
+    font-size:0.82rem;
+    opacity:0.65;
+    display:block;
+    margin-top:2px;
+    font-family:'Work Sans', sans-serif;
+  }
+  .menu-item .leader{
+    flex:1;
+    border-bottom:1px dotted rgba(43,27,20,0.4);
+    margin-bottom:5px;
+  }
+  .menu-item .price{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.9rem;
+    color:var(--sienna);
+  }
+
+  /* ---------- visit ---------- */
+  .visit{
+    padding:88px 0;
+    background:var(--espresso);
+    color:var(--cream);
+  }
+  .visit .wrap{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:56px;
+  }
+  .visit h2{color:var(--cream);font-size:2rem;margin-bottom:22px;}
+  .hours-table{width:100%;border-collapse:collapse;font-size:0.95rem;}
+  .hours-table td{padding:9px 0;border-bottom:1px solid rgba(245,235,216,0.15);}
+  .hours-table td:last-child{text-align:right;font-family:'JetBrains Mono', monospace;color:var(--almond);}
+  .addr p{opacity:0.85;margin-bottom:24px;}
+  .addr .btn-outline{border-color:var(--cream);color:var(--cream);}
+  .addr .btn-outline:hover{background:var(--cream);color:var(--espresso);}
+
+  /* ---------- newsletter ---------- */
+  .join{padding:88px 0;text-align:center;}
+  .join .wrap{max-width:560px;}
+  .join h2{font-size:2rem;margin-bottom:14px;}
+  .join p{opacity:0.8;margin-bottom:32px;}
+  form.join-form{
+    display:flex;
+    gap:10px;
+    border-bottom:1px solid var(--espresso);
+    padding-bottom:10px;
+  }
+  form.join-form input[type="email"]{
+    flex:1;
+    border:none;
+    background:transparent;
+    font-family:'Work Sans', sans-serif;
+    font-size:1rem;
+    color:var(--ink);
+    padding:8px 4px;
+  }
+  form.join-form input::placeholder{color:rgba(58,50,44,0.5);}
+  form.join-form button{
+    background:none;
+    border:none;
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.85rem;
+    letter-spacing:0.05em;
+    color:var(--sienna);
+    cursor:pointer;
+    text-transform:uppercase;
+    padding:8px 4px;
+  }
+  .join-note{font-size:0.78rem;opacity:0.55;margin-top:14px;}
+
+  /* ---------- footer ---------- */
+  footer{
+    padding:40px 0;
+    border-top:1px solid rgba(43,27,20,0.15);
+  }
+  footer .wrap{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:16px;
+  }
+  footer .foot-logo{font-family:'Fraunces', serif;font-weight:600;color:var(--espresso);}
+  footer .socials{display:flex;gap:18px;}
+  footer .socials a{font-size:0.85rem;text-decoration:none;opacity:0.7;}
+  footer .socials a:hover{opacity:1;}
+  footer .fine{font-size:0.78rem;opacity:0.55;}
+
+  /* ---------- responsive ---------- */
+  @media (max-width: 860px){
+    nav{display:none;}
+    .hero .wrap, .about .wrap, .visit .wrap{grid-template-columns:1fr;}
+    .cup-wrap{order:-1;}
+    .menu-grid{grid-template-columns:1fr;gap:40px;}
+    footer .wrap{flex-direction:column;text-align:center;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a href="#" class="logo">OWF <span>Cafe</span></a>
+    <nav aria-label="Primary">
+      <a href="#menu">Menu</a>
+      <a href="#about">About</a>
+      <a href="#visit">Visit</a>
+    </nav>
+    <a href="#join" class="btn-cta">Join the list</a>
+  </div>
+</header>
+
+<main>
+
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <span class="eyebrow">Corner of 5th &amp; Birch</span>
+        <h1>Slow mornings, <em>done right.</em></h1>
+        <p>OWF Cafe pours small-batch coffee and bakes everything fresh, every day. No rush, no lines out the door — just a good seat and a warm cup.</p>
+        <div class="hero-actions">
+          <a href="#menu" class="btn-solid">View the menu</a>
+          <a href="#visit" class="btn-outline">Get directions</a>
+        </div>
+      </div>
+      <div class="cup-wrap">
+        <svg width="260" height="300" viewBox="0 0 260 300" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Illustration of a steaming coffee cup">
+          <g class="steam" stroke="#7C8B6F" stroke-width="4" stroke-linecap="round" fill="none">
+            <path d="M100 90 C 90 70, 110 55, 100 35"/>
+            <path d="M130 90 C 120 70, 140 55, 130 35"/>
+            <path d="M160 90 C 150 70, 170 55, 160 35"/>
+          </g>
+          <ellipse cx="130" cy="230" rx="90" ry="14" fill="#2B1B14" opacity="0.08"/>
+          <path d="M55 110 H205 L192 220 C190 236 176 246 160 246 H100 C84 246 70 236 68 220 L55 110 Z" fill="#E8DCC8" stroke="#2B1B14" stroke-width="4"/>
+          <path d="M60 130 H200" stroke="#2B1B14" stroke-width="4"/>
+          <path d="M205 130 C 230 130 245 148 245 168 C 245 188 230 202 205 200" stroke="#2B1B14" stroke-width="4" fill="none"/>
+          <rect x="40" y="248" width="180" height="14" rx="4" fill="#2B1B14"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <section class="about" id="about">
+    <div class="wrap">
+      <div>
+        <h2>Coffee should slow you down, not speed you up.</h2>
+        <p>OWF opened in 2019 as a one-bar counter with two stools. We roast in small batches, source direct where we can, and bake pastries every morning before the doors open. Come for the coffee, stay for the quiet.</p>
+      </div>
+      <div class="receipt">
+        <div class="r-title">OWF — Since 2019</div>
+        <div class="r-row"><span>Cups poured</span><span>120,000+</span></div>
+        <div class="r-row"><span>Beans roasted</span><span>Small batch, weekly</span></div>
+        <div class="r-row"><span>Pastries baked</span><span>Fresh, daily</span></div>
+        <div class="r-row"><span>Seats</span><span>24 inside · 10 out</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="menu" id="menu">
+    <div class="wrap">
+      <div class="menu-head">
+        <h2>This morning's menu</h2>
+        <p>A short list, kept honest. Ask your barista what's brewing as a pour-over — it changes weekly.</p>
+      </div>
+      <div class="menu-grid">
+        <div class="menu-cat">
+          <h3>Coffee</h3>
+          <div class="menu-item"><span class="name">Drip<span class="desc">House blend, bottomless</span></span><span class="leader"></span><span class="price">$3.50</span></div>
+          <div class="menu-item"><span class="name">Cortado<span class="desc">Equal parts espresso &amp; milk</span></span><span class="leader"></span><span class="price">$4.25</span></div>
+          <div class="menu-item"><span class="name">Pour-over<span class="desc">Rotating single origin</span></span><span class="leader"></span><span class="price">$5.50</span></div>
+          <div class="menu-item"><span class="name">Iced oat latte<span class="desc">Double shot, house oat milk</span></span><span class="leader"></span><span class="price">$5.75</span></div>
+        </div>
+        <div class="menu-cat">
+          <h3>Pastries</h3>
+          <div class="menu-item"><span class="name">Morning bun<span class="desc">Orange, cardamom</span></span><span class="leader"></span><span class="price">$4.00</span></div>
+          <div class="menu-item"><span class="name">Sourdough scone<span class="desc">Rotating seasonal fruit</span></span><span class="leader"></span><span class="price">$4.25</span></div>
+          <div class="menu-item"><span class="name">Almond croissant<span class="desc">Baked to order</span></span><span class="leader"></span><span class="price">$4.75</span></div>
+        </div>
+        <div class="menu-cat">
+          <h3>Toast &amp; Bowls</h3>
+          <div class="menu-item"><span class="name">Avocado toast<span class="desc">Chili crisp, lime</span></span><span class="leader"></span><span class="price">$8.50</span></div>
+          <div class="menu-item"><span class="name">Ricotta toast<span class="desc">Local honey, thyme</span></span><span class="leader"></span><span class="price">$8.00</span></div>
+          <div class="menu-item"><span class="name">Yogurt bowl<span class="desc">Granola, seasonal fruit</span></span><span class="leader"></span><span class="price">$7.50</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="visit" id="visit">
+    <div class="wrap">
+      <div>
+        <h2>Hours</h2>
+        <table class="hours-table">
+          <tr><td>Monday – Friday</td><td>7:00 – 17:00</td></tr>
+          <tr><td>Saturday</td><td>8:00 – 17:00</td></tr>
+          <tr><td>Sunday</td><td>8:00 – 15:00</td></tr>
+        </table>
+      </div>
+      <div class="addr">
+        <h2>Find us</h2>
+        <p>412 Birch Street<br>Riverside District<br>Open every day, rain or shine.</p>
+        <a href="https://maps.google.com" class="btn-outline" target="_blank" rel="noopener">Get directions</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="join" id="join">
+    <div class="wrap">
+      <h2>Join the morning list</h2>
+      <p>One short email a week — new roasts, seasonal menu changes, and the occasional free-pastry Friday.</p>
+      <form class="join-form" action="https://formspree.io/f/yourFormID" method="POST">
+        <input type="email" name="email" placeholder="you@email.com" required aria-label="Email address">
+        <button type="submit">Sign up</button>
+      </form>
+      <p class="join-note">Replace the Formspree form ID above with your own before publishing.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span class="foot-logo">OWF Cafe</span>
+    <div class="socials">
+      <a href="#">Instagram</a>
+      <a href="#">Facebook</a>
+      <a href="mailto:hello@owfcafe.com">hello@owfcafe.com</a>
+    </div>
+    <span class="fine">© 2026 OWF Cafe. All rights reserved.</span>
+  </div>
+</footer>
+
+</body>
+</html>
